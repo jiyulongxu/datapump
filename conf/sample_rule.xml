@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="vtabroot" class="com.taobao.tddl.rule.VirtualTableRoot"
+		init-method="init">
+		<property name="dbType" value="MYSQL" />
+		<property name="defaultDbIndex" value="tddl5_sample_group" />
+		<property name="tableRules">
+			<map>
+				<entry key="ATEST" value-ref="sample_table" />
+			</map>
+		</property>
+	</bean>
+
+	
+	<bean id="sample_table" class="com.taobao.tddl.rule.TableRule">
+		<property name="allowFullTableScan" value="true" />
+		<property name="dbNamePattern" value="tddl5_sample_group" />
+		<property name="tbRules" value="Math.abs(Long.valueOf(#id,1,4#)) % 4" />
+		<property name="tbNamePattern" value="sync_{0000}" />
+	</bean>
+
+</beans>
